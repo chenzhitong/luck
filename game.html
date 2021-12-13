@@ -110,6 +110,12 @@
         .times {
             display: none;
         }
+        .modal-body {
+            height: calc(100vh - 350px);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
     </style>
 </head>
 <body>
@@ -133,7 +139,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-center p-0" style="height: calc(100vh - 350px);">
+                <div class="modal-body text-center p-0">
                     
                 </div>
                 <div class="modal-footer">
@@ -184,7 +190,7 @@
                     $("#btn").text("开始");
                     var active = $("#list .active span").text();
                     $('#myModalLabel').text("有请 " + active + " 上台");
-                    $('.modal-body').html("<img class='img-fluid' src='img-large/" + active + ".jpg' />");
+                    $('.modal-body').css("background-image", "url(./img-large/" + active + ".jpg)");
                     $('#myModal').modal({ backdrop: 'static', keyboard: false });
                 }, 500)
             }
