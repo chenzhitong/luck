@@ -131,6 +131,7 @@
             outline: none;
             width: 50px;
         }
+
         .modal-body .modal-img {
             width: 25%;
             display: inline-block;
@@ -190,6 +191,10 @@
         }
         $("#btn").click(function () {
             var number = $("#number").val();
+            if (number > $("#list").children().length) {
+                alert("人数不足");
+                return;
+            }
             if (number == 1) {
                 if (!isStart) {
                     var count = $("#list").children().length;
@@ -216,32 +221,29 @@
                 }
             }
             else {
-                if (number <= $("#list").children().length) {
-                    $("#list").children().removeClass("active");
-                    randomlist = [];
-                    var count = $("#list").children().length;
-                    $('.modal-body').html("");
-                    while (randomlist.length < number) {
 
-                        var r = Math.floor(Math.random() * count);
-                        if (randomlist.indexOf(r) == -1) {
-                            randomlist.push(r);
-                        }
-                    }
-                    for (var i = 0; i < randomlist.length; i++) {
-                        var r = randomlist[i];
-                        $('.modal-body').css("background-image", "");
-                        $($("#list").children()[r]).addClass("active");
-                        var active = $($("#list").children()[r]).text();
-                        $('.modal-body').html($('.modal-body').html() + "<div class='modal-img m-1'><img src='./img-large/" + active + ".jpg' /><span>" + active + "</span></div>");
-                    }
+                $("#list").children().removeClass("active");
+                randomlist = [];
+                var count = $("#list").children().length;
+                $('.modal-body').html("");
+                while (randomlist.length < number) {
 
-                    $('#myModalLabel').text("有请 " + number + " 位上台");
-                    $('#myModal').modal({ backdrop: 'static', keyboard: false });
+                    var r = Math.floor(Math.random() * count);
+                    if (randomlist.indexOf(r) == -1) {
+                        randomlist.push(r);
+                    }
                 }
-                else {
-                    alert("人数不足");
+                for (var i = 0; i < randomlist.length; i++) {
+                    var r = randomlist[i];
+                    $('.modal-body').css("background-image", "");
+                    $($("#list").children()[r]).addClass("active");
+                    var active = $($("#list").children()[r]).text();
+                    $('.modal-body').html($('.modal-body').html() + "<div class='modal-img m-1'><img src='./img-large/" + active + ".jpg' /><span>" + active + "</span></div>");
                 }
+
+                $('#myModalLabel').text("有请 " + number + " 位上台");
+                $('#myModal').modal({ backdrop: 'static', keyboard: false });
+
             }
         });
         $("#yes").click(function () {
